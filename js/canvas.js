@@ -55,14 +55,19 @@ function DrawFunction(f){
 			x = xmin
 			ymin = eval(func);
 			ymax = eval(func);
+			var wasInfinite = 0;
 			for (x = xmin; x <= xmax; x += 0.01) {
 				y = eval(func);
-				if (y > ymax) {
+				if (!isFinite(ymax) || (y > ymax)) {
 					ymax = y;
 				}
-				if (y < ymin) {
+				if (!isFinite(ymin) || (y < ymin)) {
 					ymin = y;
 				}
+			}
+			if (!isFinite(ymax) || !isFinite(ymin)){
+				window.alert("Ошибка");
+				return;
 			}
 		}
 		else {
@@ -123,14 +128,7 @@ function DrawFunction(f){
 				ctx.lineTo(i, -0.005 * canvas.width);
 				ctx.lineTo(i, 0);
 				k--;k++;
-				if (Math.abs(i) < 0.025 * canvas.width) {
-					ctx.textAlign = "left";
-					ctx.fillText(k.toFixed(1), 0.0025 * canvas.width, 0.0025 * canvas.width);
-					ctx.textAlign = "right";
-				}
-				else {
-					ctx.fillText(k.toFixed(1), -0.0025 * canvas.width + i, 0.0025 * canvas.width);
-				}
+				ctx.fillText(k.toFixed(1), -0.0025 * canvas.width + i, 0.0025 * canvas.width);
 				k += step;
 			}
 			ctx.lineTo(0.025 * canvas.width + m * p, 0);
@@ -213,14 +211,7 @@ function DrawFunction(f){
 				ctx.lineTo(i, -0.005 * canvas.height);
 				ctx.lineTo(i, 0);
 				k--;k++;
-				if (Math.abs(i) < 0.025 * canvas.width) {
-					ctx.textAlign = "left";
-					ctx.fillText(k.toFixed(1), 0.0025 * canvas.width, 0.0025 * canvas.width);
-					ctx.textAlign = "right";
-				}
-				else {
-					ctx.fillText(k.toFixed(1), -0.0025 * canvas.width + i, 0.0025 * canvas.width);
-				}
+				ctx.fillText(k.toFixed(1), -0.0025 * canvas.width + i, 0.0025 * canvas.width);
 				k += step;
 			}
 			ctx.lineTo(0.475 * canvas.width, 0);
@@ -291,4 +282,18 @@ function agreeForm(f) {
 		f.ymin.disabled = 0
 		f.ymax.disabled = 0
 	}
+}
+
+function clearForm(f) {
+	f.ymin.value = "";
+	f.ymax.value = "";
+	f.xmin.value = "";
+	f.xmax.value = "";
+	f.ymin.disabled = 0;
+	f.ymax.disabled = 0;
+	f.clear.checked = 0;
+	var canvas = document.getElementById("canvas");
+	var ctx = canvas.getContext('2d');
+	ctx.setTransform(1, 0, 0, 1, 0, 0);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
