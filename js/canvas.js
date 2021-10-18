@@ -38,11 +38,11 @@ function DrawFunction(f){
 			return;
 		}
 		var func = f.func.value;
-		if (!f.xmin.value || !f.xmax.value) {
+		if (!f.xmin.value || !f.xmax.value ) {
 			window.alert("Введите интервал X");
 			return;
 		}
-		if (f.xmin.value >= f.xmax.value) {
+		if (f.xmin.value >= f.xmax.value || isNaN(f.xmin.value) || isNaN(f.xmax.value)) {
 			window.alert("Некорректный интервал X");
 			return;
 		}
@@ -57,7 +57,12 @@ function DrawFunction(f){
 			ymax = eval(func);
 			var wasInfinite = 0;
 			for (x = xmin; x <= xmax; x += 0.01) {
-				y = eval(func);
+				try {
+					y = eval(func);
+				} catch(e) {
+					window.alert("Ошибка");
+					return;
+				}
 				if (!isFinite(ymax) || (y > ymax)) {
 					ymax = y;
 				}
@@ -65,7 +70,7 @@ function DrawFunction(f){
 					ymin = y;
 				}
 			}
-			if (!isFinite(ymax) || !isFinite(ymin)){
+			if (!isFinite(ymax) || !isFinite(ymin) || isNaN(f.ymin.value) || isNaN(f.ymax.value)){
 				window.alert("Ошибка");
 				return;
 			}
@@ -94,7 +99,12 @@ function DrawFunction(f){
 			ctx.beginPath();
 			for (let i = 0, f = 0; i <= (xmax - xmin) * p; i++) {
 				var x = +xmin + (i / p);
-				y = eval(func);
+				try {
+					y = eval(func);
+				} catch(e) {
+					window.alert("Ошибка");
+					return;
+				}
 				if ((y >= ymin) && (y <= ymax)) {
 					if (f == 0) {
 						f = 1;
@@ -256,44 +266,4 @@ function DrawFunction(f){
 			ctx.fillText("y", 0.01 * canvas.width, -0.01 * canvas.height - m * p);
 		}
 	}
-}
-
-function draw() {
-  var canvas = document.getElementById('canvas');
-  if (canvas.getContext){
-    var ctx = canvas.getContext('2d');
-
-    ctx.beginPath();
-    ctx.moveTo(75,50);
-    ctx.lineTo(100,75);
-    ctx.lineTo(100,25);
-    ctx.fill();
-  }
-}
-
-function agreeForm(f) {
-	if (f.auto.checked) {
-		f.ymin.value = ""
-		f.ymax.value = ""
-		f.ymin.disabled = 1
-		f.ymax.disabled = 1
-	}
-	else {
-		f.ymin.disabled = 0
-		f.ymax.disabled = 0
-	}
-}
-
-function clearForm(f) {
-	f.ymin.value = "";
-	f.ymax.value = "";
-	f.xmin.value = "";
-	f.xmax.value = "";
-	f.ymin.disabled = 0;
-	f.ymax.disabled = 0;
-	f.clear.checked = 0;
-	var canvas = document.getElementById("canvas");
-	var ctx = canvas.getContext('2d');
-	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
 }
