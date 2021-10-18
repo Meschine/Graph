@@ -124,7 +124,6 @@ function DrawFunction(f){
 				ctx.lineTo(i, 0);
 				k--;k++;
 				if (Math.abs(i) < 0.025 * canvas.width) {
-					window.alert(1);
 					ctx.textAlign = "left";
 					ctx.fillText(k.toFixed(1), 0.0025 * canvas.width, 0.0025 * canvas.width);
 					ctx.textAlign = "right";
@@ -155,7 +154,6 @@ function DrawFunction(f){
 				ctx.lineTo(0, i);
 				k--;k++;
 				if (Math.abs(i) < 0.025 * canvas.height) {
-					window.alert(2);
 					ctx.textBaseline = "bottom";
 					ctx.fillText(k.toFixed(1), -0.0025 * canvas.width, -0.0025 * canvas.height);
 					ctx.textBaseline = "top";
@@ -216,7 +214,6 @@ function DrawFunction(f){
 				ctx.lineTo(i, 0);
 				k--;k++;
 				if (Math.abs(i) < 0.025 * canvas.width) {
-					window.alert(3);
 					ctx.textAlign = "left";
 					ctx.fillText(k.toFixed(1), 0.0025 * canvas.width, 0.0025 * canvas.width);
 					ctx.textAlign = "right";
@@ -247,9 +244,7 @@ function DrawFunction(f){
 				ctx.lineTo(-0.005 * canvas.width, i);
 				ctx.lineTo(0, i);
 				k--;k++;
-				window.alert(i);
 				if (Math.abs(i) < 0.025 * canvas.width) {
-					window.alert(4);
 					ctx.textBaseline = "bottom";
 					ctx.fillText(k.toFixed(1), -0.0025 * canvas.width, -0.0025 * canvas.width);
 					ctx.textBaseline = "top";
