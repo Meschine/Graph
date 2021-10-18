@@ -4,18 +4,17 @@
         <title>График функции</title>
 		<script src="js/canvas.js"></script>
     </head>
- 
     <body>
             <form name="info"> 
-					Функция : <input type="text" name="func" align="left" size=30 value="sin(x)"><br><br>
+		    Функция : <input type="text" name="func" align="left" size=30 value="sin(x)"><br><br>
                     x = [ <input type="text" name="xmin" align="left" size=2 value=-2>&nbsp;,&nbsp;<input type="text" name="xmax" align="left" size=2 value=3> ] <br><br>
                     y = [ <input type="text" name="ymin" align="left" size=2>&nbsp;,&nbsp;<input type="text" name="ymax" align="left" size=2> ] <br><br>
-					<input type="checkbox" name="auto" onclick="agreeForm(this.form)"> Автомасштаб по y <br><br>
+		    <input type="checkbox" name="auto" onclick="agreeForm(this.form)"> Автомасштаб по y <br><br>
                     <input type="reset" name="сlear" align="center" size=15 onclick="" value="Очистить">&nbsp;&nbsp;&nbsp;
                     <input type="button" value="Построить" name="pass" align="center" size=15 onclick="DrawFunction(this.form)"><br>
             </form>
-			<br>
+	    <br>
             <br>
-			<canvas id="canvas" style="border: 2px dashed black" width=600 height=600></canvas>
+	    <canvas id="canvas" style="border: 2px dashed black" width=600 height=600></canvas>
     </body>
 </html>
