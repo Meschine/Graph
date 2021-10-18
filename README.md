@@ -1,5 +1,5 @@
-Страница - https://meschine.github.io/Graph/
 # График функции
+Страница - https://meschine.github.io/Graph/
 Поддерживаемые функции:
 + sin(x) - синус x
 + cos(x) - косинус x
